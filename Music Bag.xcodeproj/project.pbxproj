@@ -7,22 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DEAF3C338DFD4D2A6BBB01F0 /* Pods_Music_Bag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23E69841B4DC4B82A90D632 /* Pods_Music_Bag.framework */; };
 		F7D065A426BD790600A31E37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065A326BD790600A31E37 /* AppDelegate.swift */; };
 		F7D065A626BD790600A31E37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065A526BD790600A31E37 /* SceneDelegate.swift */; };
-		F7D065A826BD790600A31E37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065A726BD790600A31E37 /* ViewController.swift */; };
+		F7D065A826BD790600A31E37 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065A726BD790600A31E37 /* HomeViewController.swift */; };
 		F7D065AD26BD790A00A31E37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7D065AC26BD790A00A31E37 /* Assets.xcassets */; };
 		F7D065B026BD790A00A31E37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7D065AE26BD790A00A31E37 /* LaunchScreen.storyboard */; };
 		F7D065B926BD7AB700A31E37 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F7D065B826BD7AB700A31E37 /* Alamofire */; };
+		F7D065BB26BD840D00A31E37 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065BA26BD840D00A31E37 /* Request.swift */; };
+		F7D065BE26BD985C00A31E37 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7D065BD26BD985C00A31E37 /* SnapKit */; };
+		F7D065C026BD99D600A31E37 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065BF26BD99D600A31E37 /* HomeTableViewCell.swift */; };
+		F7D065C226BD9E3700A31E37 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065C126BD9E3700A31E37 /* VideoViewController.swift */; };
+		F7D065C826BDA58900A31E37 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065C726BDA58900A31E37 /* APIManager.swift */; };
+		F7D065CA26BDBAE700A31E37 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065C926BDBAE700A31E37 /* NetworkManager.swift */; };
+		F7D065CE26BDC01D00A31E37 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065CD26BDC01D00A31E37 /* VideoModel.swift */; };
+		F7D065D226BE246D00A31E37 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065D126BE246D00A31E37 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7664685B2ECE85278C8309FB /* Pods-Music Bag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music Bag.release.xcconfig"; path = "Target Support Files/Pods-Music Bag/Pods-Music Bag.release.xcconfig"; sourceTree = "<group>"; };
+		BF52065107647F2A15189469 /* Pods-Music Bag.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music Bag.debug.xcconfig"; path = "Target Support Files/Pods-Music Bag/Pods-Music Bag.debug.xcconfig"; sourceTree = "<group>"; };
+		F23E69841B4DC4B82A90D632 /* Pods_Music_Bag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Music_Bag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D065A026BD790600A31E37 /* Music Bag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Bag.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D065A326BD790600A31E37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7D065A526BD790600A31E37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F7D065A726BD790600A31E37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F7D065A726BD790600A31E37 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F7D065AC26BD790A00A31E37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7D065AF26BD790A00A31E37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F7D065B126BD790A00A31E37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7D065BA26BD840D00A31E37 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		F7D065BF26BD99D600A31E37 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		F7D065C126BD9E3700A31E37 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		F7D065C726BDA58900A31E37 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		F7D065C926BDBAE700A31E37 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F7D065CC26BDBE7F00A31E37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/premier/musicBag/Music Bag/Common/Info.plist"; sourceTree = "<absolute>"; };
+		F7D065CD26BDC01D00A31E37 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		F7D065D126BE246D00A31E37 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,18 +49,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7D065BE26BD985C00A31E37 /* SnapKit in Frameworks */,
 				F7D065B926BD7AB700A31E37 /* Alamofire in Frameworks */,
+				DEAF3C338DFD4D2A6BBB01F0 /* Pods_Music_Bag.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		70ED091A7500C0D50C2D4F2C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F23E69841B4DC4B82A90D632 /* Pods_Music_Bag.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D03EA9340BB5A2869F1EB221 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BF52065107647F2A15189469 /* Pods-Music Bag.debug.xcconfig */,
+				7664685B2ECE85278C8309FB /* Pods-Music Bag.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F7D0659726BD790600A31E37 = {
 			isa = PBXGroup;
 			children = (
 				F7D065A226BD790600A31E37 /* Music Bag */,
 				F7D065A126BD790600A31E37 /* Products */,
+				D03EA9340BB5A2869F1EB221 /* Pods */,
+				70ED091A7500C0D50C2D4F2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,14 +96,61 @@
 		F7D065A226BD790600A31E37 /* Music Bag */ = {
 			isa = PBXGroup;
 			children = (
-				F7D065A326BD790600A31E37 /* AppDelegate.swift */,
-				F7D065A526BD790600A31E37 /* SceneDelegate.swift */,
-				F7D065A726BD790600A31E37 /* ViewController.swift */,
-				F7D065AC26BD790A00A31E37 /* Assets.xcassets */,
-				F7D065AE26BD790A00A31E37 /* LaunchScreen.storyboard */,
-				F7D065B126BD790A00A31E37 /* Info.plist */,
+				F7D065C526BDA52B00A31E37 /* Common */,
+				F7D065C326BDA4F300A31E37 /* ViewControllers */,
+				F7D065C426BDA51200A31E37 /* UIComponents */,
+				F7D065C626BDA54E00A31E37 /* Managers */,
+				F7D065CD26BDC01D00A31E37 /* VideoModel.swift */,
 			);
 			path = "Music Bag";
+			sourceTree = "<group>";
+		};
+		F7D065C326BDA4F300A31E37 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F7D065CF26BDCA5900A31E37 /* Home */,
+				F7D065C126BD9E3700A31E37 /* VideoViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F7D065C426BDA51200A31E37 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				F7D065BF26BD99D600A31E37 /* HomeTableViewCell.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		F7D065C526BDA52B00A31E37 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F7D065A326BD790600A31E37 /* AppDelegate.swift */,
+				F7D065A526BD790600A31E37 /* SceneDelegate.swift */,
+				F7D065AC26BD790A00A31E37 /* Assets.xcassets */,
+				F7D065AE26BD790A00A31E37 /* LaunchScreen.storyboard */,
+				F7D065BA26BD840D00A31E37 /* Request.swift */,
+				F7D065CC26BDBE7F00A31E37 /* Info.plist */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F7D065C626BDA54E00A31E37 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F7D065C726BDA58900A31E37 /* APIManager.swift */,
+				F7D065C926BDBAE700A31E37 /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		F7D065CF26BDCA5900A31E37 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F7D065A726BD790600A31E37 /* HomeViewController.swift */,
+				F7D065D126BE246D00A31E37 /* HomeViewModel.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -73,9 +160,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F7D065B426BD790A00A31E37 /* Build configuration list for PBXNativeTarget "Music Bag" */;
 			buildPhases = (
+				40B9C2565090E3AD9263A910 /* [CP] Check Pods Manifest.lock */,
 				F7D0659C26BD790600A31E37 /* Sources */,
 				F7D0659D26BD790600A31E37 /* Frameworks */,
 				F7D0659E26BD790600A31E37 /* Resources */,
+				754A8366800AA5D6EA6667B3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -84,6 +173,7 @@
 			name = "Music Bag";
 			packageProductDependencies = (
 				F7D065B826BD7AB700A31E37 /* Alamofire */,
+				F7D065BD26BD985C00A31E37 /* SnapKit */,
 			);
 			productName = "Music Bag";
 			productReference = F7D065A026BD790600A31E37 /* Music Bag.app */;
@@ -114,6 +204,7 @@
 			mainGroup = F7D0659726BD790600A31E37;
 			packageReferences = (
 				F7D065B726BD7AB700A31E37 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				F7D065BC26BD985C00A31E37 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = F7D065A126BD790600A31E37 /* Products */;
 			projectDirPath = "";
@@ -136,14 +227,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		40B9C2565090E3AD9263A910 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Music Bag-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		754A8366800AA5D6EA6667B3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Music Bag/Pods-Music Bag-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Music Bag/Pods-Music Bag-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Music Bag/Pods-Music Bag-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F7D0659C26BD790600A31E37 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7D065A826BD790600A31E37 /* ViewController.swift in Sources */,
+				F7D065C026BD99D600A31E37 /* HomeTableViewCell.swift in Sources */,
+				F7D065A826BD790600A31E37 /* HomeViewController.swift in Sources */,
+				F7D065C226BD9E3700A31E37 /* VideoViewController.swift in Sources */,
+				F7D065D226BE246D00A31E37 /* HomeViewModel.swift in Sources */,
+				F7D065BB26BD840D00A31E37 /* Request.swift in Sources */,
+				F7D065CE26BDC01D00A31E37 /* VideoModel.swift in Sources */,
+				F7D065CA26BDBAE700A31E37 /* NetworkManager.swift in Sources */,
 				F7D065A426BD790600A31E37 /* AppDelegate.swift in Sources */,
 				F7D065A626BD790600A31E37 /* SceneDelegate.swift in Sources */,
+				F7D065C826BDA58900A31E37 /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,12 +419,13 @@
 		};
 		F7D065B526BD790A00A31E37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF52065107647F2A15189469 /* Pods-Music Bag.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5SXPPKG8N5;
-				INFOPLIST_FILE = "Music Bag/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Music Bag/Common/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,12 +439,13 @@
 		};
 		F7D065B626BD790A00A31E37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7664685B2ECE85278C8309FB /* Pods-Music Bag.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5SXPPKG8N5;
-				INFOPLIST_FILE = "Music Bag/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Music Bag/Common/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -347,6 +489,14 @@
 				minimumVersion = 5.4.3;
 			};
 		};
+		F7D065BC26BD985C00A31E37 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -354,6 +504,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F7D065B726BD7AB700A31E37 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		F7D065BD26BD985C00A31E37 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F7D065BC26BD985C00A31E37 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

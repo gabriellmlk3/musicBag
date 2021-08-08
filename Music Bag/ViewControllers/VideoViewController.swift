@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  VideoViewController.swift
 //  Music Bag
 //
 //  Created by Premier on 06/08/21.
@@ -7,13 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class VideoViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
 }
-
