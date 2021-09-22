@@ -7,12 +7,21 @@
 
 import UIKit
 import SnapKit
+import Bagel
+import Firebase
+import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+        #if DEBUG
+        Bagel.start()
+        #endif
         return true
     }
 

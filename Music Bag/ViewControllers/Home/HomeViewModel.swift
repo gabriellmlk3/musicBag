@@ -2,7 +2,7 @@
 //  HomeViewModel.swift
 //  Music Bag
 //
-//  Created by Premier on 06/08/21.
+//  Created by Premier on 20/09/21.
 //
 
 import Foundation
@@ -13,8 +13,8 @@ protocol HomeViewModelDelegate {
 }
 
 class HomeViewModel {
-    
-    var dataSource: VideoModel? {
+        
+    var musics: [MusicModel]? {
         didSet {
             delegate.loadDataDidFinish()
         }
@@ -24,23 +24,14 @@ class HomeViewModel {
     
     init(delegate: HomeViewModelDelegate){
         self.delegate = delegate
-        self.loadData()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadData() {
-        NetworkManager.shared.fetch(VideoModel.self, endpoint: .youTube) { result in
-            switch result {
-            case .success(let video):
-                self.dataSource = video
-                debugPrint(video)
-            case .failure(let error):
-                self.delegate.loadDataDidFinish(with: error.localizedDescription)
-                print("fail: \(error)")
-            }
-        }
+    func fetchMusics(musics: [MusicModel]) {
+        self.musics = musics
     }
+
 }

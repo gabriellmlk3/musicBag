@@ -7,6 +7,10 @@ target 'Music Bag' do
 
   # Pods for Music Bag
 
-  pod "youtube-ios-player-helper"
+ pod 'Bagel', '~>  1.3.2'
+ pod 'Firebase/Analytics'
+ pod 'Firebase/Database'
+ pod 'Firebase/Auth'
+ pod 'Firebase/Storage'
 
 end

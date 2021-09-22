@@ -8,7 +8,13 @@
 		<true/>
 	</dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDI-myR0xjtU8nuiLsEpjtCz683ka4Fj7Q</string>
+	<string></string>
+	<key>BASE_URL</key>
+	<string>www.youtube.com</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_Bagel._tcp</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

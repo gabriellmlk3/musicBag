@@ -28,13 +28,11 @@ struct Items: Codable {
 
 struct ID: Codable {
     var kind: String
-    var videoID: String
+    var VideoId: String
     
     enum CodingKeys: String, CodingKey {
-        case kind
-        case videoID = "VideoId"
+        case kind, VideoId
     }
-    
 }
 
 struct Snippet: Codable {
