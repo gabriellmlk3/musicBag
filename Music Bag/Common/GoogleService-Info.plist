@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>882324499901-6acs9hbm7cltbqsl9dv8it524bg5qsqj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.882324499901-6acs9hbm7cltbqsl9dv8it524bg5qsqj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBAkuMJOkdtQj232w9UGJVo4ClpiiCo9Sg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>882324499901</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>br.com.Music-Bag</string>
+	<key>PROJECT_ID</key>
+	<string>pure-environs-322118</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pure-environs-322118.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:882324499901:ios:eaaaa11e1549ca40e236d4</string>
+</dict>
+</plist>
