@@ -13,8 +13,10 @@ protocol HomeViewModelDelegate {
 }
 
 class HomeViewModel {
-        
-    var musics: [MusicModel]? {
+    
+    var dataSource: [MusicModel] = []
+    
+    var musics: Dictionary = [Int: [MusicModel]]() {
         didSet {
             delegate.loadDataDidFinish()
         }
@@ -31,7 +33,20 @@ class HomeViewModel {
     }
     
     func fetchMusics(musics: [MusicModel]) {
-        self.musics = musics
+        self.dataSource = musics
+        populateDictionary()
+    }
+    
+    private func populateDictionary() {
+        self.musics = Dictionary(grouping: dataSource, by: {
+                                    switch $0.isLoved {
+                                    case true:
+                                        return 0
+                                    case false:
+                                        return 1
+                                    }
+            
+        })
     }
 
 }

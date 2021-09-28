@@ -11,22 +11,25 @@ import AVFoundation
 class MusicViewController: BaseViewController, UIScrollViewDelegate {
     
 //MARK: - Attributes
-    private var isPlaying: Bool {
+    private var lastTitle = String()
+    private var lastLargeTitle = true
+    private lazy var viewModel = MusicViewModel.shared
+    
+    private var isPlaying = false {
         didSet {
             if self.isPlaying {
                 self.playPauseButton.setImage(.pauseIcon, for: .normal)
+                self.viewModel.play()
+                MusicManager.shared.playedViewController = self
+                MusicManager.shared.musicID = viewModel.music?.trackID
+                MusicManager.shared.isPlaying = true
             } else {
                 self.playPauseButton.setImage(.playIcon, for: .normal)
+                self.viewModel.pause()
+                MusicManager.shared.isPlaying = false
             }
         }
     }
-    
-    private var timer: Timer?
-    private var totalTime = 0.0
-    private var time = 0.0
-    private var player: AVAudioPlayer?
-
-    private lazy var viewModel = MusicViewModel(delegate: self)
     
     private lazy var whiteGradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
@@ -95,7 +98,7 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
     
     private var contentContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black17181A
+        view.backgroundColor = .backgroundColor
         view.layer.cornerRadius = 16
         return view
     }()
@@ -127,7 +130,6 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
     private lazy var progressSlider: UISlider = {
         let slider = UISlider()
         let thumbImage = UIImage.circlebadgeIcon.cgImage
-        slider.maximumValue = Float(totalTime)
         slider.isContinuous = true
         slider.tintColor = .blue505975
         slider.addTarget(self, action: #selector(changeTimeWithSlider), for: .valueChanged)
@@ -135,9 +137,17 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         return slider
     }()
     
+    private let authorNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGray
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        return label
+    }()
+    
     private var playPauseButton: UIButton = {
         let button = UIButton()
-        button.setImage(.playIcon, for: .normal)
+        button.imageView?.contentMode = .scaleToFill
+        button.setImage(.playIcon.withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(togglePlayPause), for: .touchUpInside)
         return button
     }()
@@ -172,23 +182,27 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
     
     private lazy var loveButtonItem: UIButton = {
         let buttonItem = UIButton()
-        guard let music = viewModel.music else { return buttonItem }
+        guard let music = MusicViewModel.shared.music else { return buttonItem }
         buttonItem.setImage(music.isLoved ? .filledHeartCircleIcon : .heartCircleIcon, for: .normal)
         buttonItem.addTarget(self, action: #selector(toggleLoveButton), for: .touchUpInside)
-        buttonItem.tintColor = music.isLoved ? .pinkC700B0 : .white
+        buttonItem.tintColor = music.isLoved ? .systemRed : .white
         return buttonItem
     }()
     
     
     //MARK: - Initializers
     init(music: MusicModel) {
-        self.isPlaying = false
         super.init(nibName: nil, bundle: nil)
-        self.startTimer(totalTimeInSeconds: music.trackTime)
+        self.viewModel.fetchMusics(music: music, delegate: self)
         self.trackNameLabel.text = music.trackName
+        self.authorNameLabel.text = music.trackAuthor
         self.imageView.image = music.trackImage
         self.greaterImageView.image = music.trackImage
-        self.viewModel.fetchMusics(music: music)
+    }
+    
+    init(viewModel: MusicViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -197,15 +211,27 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: .backArrowIcon, style: .plain, target: nil, action: nil)
         view.backgroundColor = .black101112
-        self.setClearNavigationController()
+        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(update), userInfo: .none, repeats: true)
+        self.showLoad(subview: imageView)
         setupLayout()
     }
 }
 
 //MARK: - HomeViewDelegate
 extension MusicViewController: MusicViewModelDelegate {
+    
+    func updateSliderWithTotalTime() {
+        self.progressSlider.maximumValue = Float(viewModel.totalTime)
+    }
+    
+    func updatePlayer() {
+        update()
+    }
+    
     func loadDataDidFinish() {
+        self.dismissLoad()
     }
     
     func loadDataDidFinish(with error: String) {
@@ -219,39 +245,42 @@ extension MusicViewController: MusicViewModelDelegate {
 extension MusicViewController {
     
     @objc
-    private func updatePlayer() {
-        if time < totalTime && isPlaying { time += 1 }
-        if time == totalTime { isPlaying = false }
-        if time < 0 { time = 0.0} else if time > totalTime { time = totalTime }
+    private func update() {
+        guard var currentTime = MusicViewModel.shared.player?.currentTime else { return }
+        if currentTime == viewModel.totalTime { isPlaying = false }
+        if currentTime < 0 { currentTime = 0.0} else if currentTime > viewModel.totalTime { currentTime = viewModel.totalTime }
         
-        trackTimeLabel.text = self.timeFormatted(Int(time))
+        trackTimeLabel.text = self.timeFormatted(Int(currentTime))
+        
         UIView.animate(withDuration: 0.9) {
-            self.progressSlider.setValue(Float(self.time), animated: true)
+            self.progressSlider.setValue(Float(currentTime), animated: true)
         }
     }
     
     @objc
     private func backwardTrack() {
-        time = 0.0
-        updatePlayer()
+        viewModel.player?.currentTime = 0.0
+        update()
     }
     
     @objc
     private func forwardTrack() {
-        time = totalTime
-        updatePlayer()
+        update()
     }
     
     @objc
     private func backward5SecTrack() {
-        if time > 0 { time -= 5.0 }
-        updatePlayer()
+        guard let currentTime = MusicViewModel.shared.player?.currentTime else { return }
+        if currentTime > 0 {
+            viewModel.player?.currentTime -= 5.0
+        }
+        update()
     }
     
     @objc
     private func forward5SecTrack() {
-        if time < totalTime { time += 5.0 }
-        updatePlayer()
+        if viewModel.CurrenTime < viewModel.totalTime { viewModel.player?.currentTime += 5.0 }
+        update()
     }
     
     @objc
@@ -263,11 +292,6 @@ extension MusicViewController {
 
 //MARK: - Timer Controller
 extension MusicViewController {
-    
-    private func startTimer(totalTimeInSeconds: Double) {
-        self.totalTime = totalTimeInSeconds
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePlayer), userInfo: nil, repeats: true)
-    }
     
     private func timeFormatted(_ totalSeconds: Int) -> String {
         let seconds: Int = totalSeconds % 60
@@ -287,9 +311,9 @@ extension MusicViewController {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
 
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            viewModel.player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
 
-            guard let player = player else { return }
+            guard let player = MusicViewModel.shared.player else { return }
 
             player.play()
 
@@ -300,20 +324,25 @@ extension MusicViewController {
     
     @objc
     private func changeTimeWithSlider() {
-        time = Double(progressSlider.value)
+        viewModel.player?.currentTime = TimeInterval(progressSlider.value)
     }
     
     @objc
     private func toggleLoveButton() {
-        guard let music = viewModel.music else { return }
+        guard let music = MusicViewModel.shared.music else { return }
         if music.isLoved {
             self.loveButtonItem.tintColor = .white
             self.loveButtonItem.setImage(UIImage.heartCircleIcon, for: .normal)
             music.isLoved = false
+            guard let index = MusicManager.shared.lovedMusicID.firstIndex(of: music.trackID) else { return }
+            MusicManager.shared.lovedMusicID.remove(at: index)
+            MusicManager.shared.isLoved = false
         } else {
-            self.loveButtonItem.tintColor = .pinkC700B0
+            self.loveButtonItem.tintColor = .systemRed
             self.loveButtonItem.setImage(UIImage.filledHeartCircleIcon, for: .normal)
             music.isLoved = true
+            MusicManager.shared.lovedMusicID.append(music.trackID)
+            MusicManager.shared.isLoved = true
         }
     }
 }
@@ -383,20 +412,26 @@ extension MusicViewController {
                 make.top.equalTo(greaterImageContainerHeaderView.snp.bottom).offset(-16)
                 make.leading.trailing.equalTo(view)
                 make.bottom.equalTo(view)
-                make.height.equalTo(250)
+                make.height.equalTo(view.bounds.height / 100 * 28)
             }
             
             contentContainerView.addSubview(trackNameLabel)
             trackNameLabel.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(20)
+                make.top.equalToSuperview().offset(15)
                 make.leading.equalToSuperview().offset(15)
                 make.trailing.equalToSuperview().offset(-15)
             }
             
             contentContainerView.addSubview(progressSlider)
             progressSlider.snp.makeConstraints { make in
-                make.top.equalTo(trackNameLabel.snp.bottom).offset(15)
+                make.top.equalTo(trackNameLabel.snp.bottom).offset(10)
                 make.leading.trailing.equalToSuperview()
+            }
+            
+            contentContainerView.addSubview(authorNameLabel)
+            authorNameLabel.snp.makeConstraints { make in
+                make.top.equalTo(progressSlider.snp.bottom).offset(15)
+                make.centerX.equalToSuperview()
             }
             
             contentContainerView.addSubview(playerConteiner)

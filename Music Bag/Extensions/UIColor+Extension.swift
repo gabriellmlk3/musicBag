@@ -44,6 +44,10 @@ extension UIColor {
     open class var pinkC700B0: UIColor {
         return UIColor(hex: "#db8fd2")
     }
+    
+    open class var backgroundColor: UIColor {
+        return UIColor(hex: "#17181A")
+    }
 }
 
 extension UIColor {

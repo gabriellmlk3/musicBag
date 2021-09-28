@@ -9,8 +9,20 @@ import UIKit
 
 extension UIImage {
     
+    open class var homeIcon: UIImage {
+        return UIImage(named: "iconHomeTabBar")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
+    }
+    
+    open class var backArrowIcon: UIImage {
+        return UIImage(named: "backArrowIcon") ?? UIImage()
+    }
+    
     open class var playIcon: UIImage {
         return UIImage(named: "play") ?? UIImage()
+    }
+    
+    open class var tabBarPlayIcon: UIImage {
+        return UIImage(named: "tabBarPlayIcon") ?? UIImage()
     }
     
     open class var pauseIcon: UIImage {
@@ -37,6 +49,10 @@ extension UIImage {
         return UIImage(named: "circlebadge") ?? UIImage()
     }
     
+    open class var userIcon: UIImage {
+        return UIImage(named: "userIcon")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
+    }
+    
     open class var filledHeartCircleIcon: UIImage {
         return UIImage(named: "filledHeartCircle")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
     }
@@ -45,3 +61,4 @@ extension UIImage {
         return UIImage(named: "heartCircle")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
     }
 }
+

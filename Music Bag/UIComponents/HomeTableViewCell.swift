@@ -11,10 +11,14 @@ final class HomeTableViewCell: UITableViewCell {
     
     static let reuseID = "HomeCell"
     
+    private var musicID: String = String()
+    
+    private var isLoved: Bool = false
+    
     private let musicImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 10
         imageView.backgroundColor = .gray
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -26,10 +30,31 @@ final class HomeTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let authorNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGray
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        return label
+    }()
+    
     private var isLovedIndicator: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .white
+        imageView.image = UIImage.filledHeartCircleIcon
         return imageView
+    }()
+    
+    private var isPlayingIndicator: UIImageView = {
+        let imageView = UIImageView()
+        imageView.tintColor = .white
+        imageView.image = .playIcon
+        return imageView
+    }()
+    
+    private var divisor: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray383838
+        return view
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -46,32 +71,67 @@ final class HomeTableViewCell: UITableViewCell {
         
         self.addSubview(musicImage)
         musicImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(15)
-            make.leading.equalToSuperview().offset(15)
-            make.bottom.equalToSuperview().offset(-15)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.bottom.equalToSuperview()
             make.size.equalTo(80)
         }
         
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
             make.leading.equalTo(musicImage.snp.trailing).offset(20)
             make.trailing.equalToSuperview().offset(-15)
-            make.centerY.equalToSuperview()
         }
         
-        self.addSubview(isLovedIndicator)
-        isLovedIndicator.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-15)
-            make.centerY.equalToSuperview()
-            make.size.equalTo(30)
+        self.addSubview(authorNameLabel)
+        authorNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
+            make.leading.equalTo(titleLabel)
+            make.bottom.equalToSuperview().offset(-20)
+        }
+        
+        if MusicManager.shared.lovedMusicID.contains(musicID){
+            self.addSubview(isLovedIndicator)
+            isLovedIndicator.snp.makeConstraints { make in
+                make.trailing.equalToSuperview().offset(-15)
+                make.centerY.equalToSuperview()
+                make.height.equalTo(20)
+                make.width.equalTo(25)
+            }
+        } else {
+            isLovedIndicator.removeFromSuperview()
+        }
+        
+        if  MusicManager.shared.isPlaying && MusicManager.shared.musicID == musicID {
+            self.addSubview(isPlayingIndicator)
+            isPlayingIndicator.snp.makeConstraints { make in
+                make.trailing.equalTo(MusicManager.shared.isLoved ? isLovedIndicator.snp.leading : self).offset(-15)
+                make.centerY.equalToSuperview()
+                make.height.equalTo(20)
+                make.width.equalTo(20)
+                
+            }
+        } else {
+            isPlayingIndicator.removeFromSuperview()
+        }
+        
+        self.addSubview(divisor)
+        divisor.snp.makeConstraints { make in
+            make.leading.equalTo(musicImage.snp.trailing)
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
     
     func setupCell(music: MusicModel) {
         setupLayout()
-        self.isLovedIndicator.image = music.isLoved ? UIImage.filledHeartCircleIcon : UIImage()
         self.titleLabel.text = music.trackName
+        self.authorNameLabel.text = music.trackAuthor
         self.musicImage.image = music.trackImage
+        self.musicID = music.trackID
+        self.isLoved = music.isLoved
     }
 
     override func awakeFromNib() {
@@ -83,3 +143,4 @@ final class HomeTableViewCell: UITableViewCell {
     }
 
 }
+

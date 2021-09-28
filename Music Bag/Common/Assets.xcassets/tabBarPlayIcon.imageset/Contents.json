@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "play.square.fill.svg",
       "idiom" : "universal"
     }
   ],

@@ -10,22 +10,16 @@ import UIKit
 class BaseViewController: UIViewController {
     
     var isLoading: Bool = false
-    
-    public func setClearNavigationController() {
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.backgroundColor = .clear
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.topItem?.title = ""
-        navigationController?.navigationBar.tintColor = .white
-    }
+    var loadView: UIView?
     
     public func setNormalNavigationController(title: String?) {
-        navigationController?.navigationBar.backgroundColor = .black17181A
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.largeContentTitle = title ?? ""
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.title = title
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.barTintColor = .black1E2125
+        navigationController?.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .bold),
+        ]
     }
     
     public func showAlert(with text: String) {
@@ -39,11 +33,8 @@ class BaseViewController: UIViewController {
             }
             
             let alertController = UIAlertController.init(title: "Atenção", message: text, preferredStyle: .alert)
-            
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                
                 blurVisualEffectView.removeFromSuperview()
-                
             }))
             
             self.view.addSubview(blurVisualEffectView)
@@ -55,14 +46,15 @@ class BaseViewController: UIViewController {
         self.isLoading = true
         
         let blurEffect = UIBlurEffect(style: .dark)
-        let blurVisualEffectView = UIVisualEffectView(effect: blurEffect)
         
+        let blurVisualEffectView = UIVisualEffectView(effect: blurEffect)
         blurVisualEffectView.frame = CGRect(x: 90, y: 400, width: 250, height: 35)
         blurVisualEffectView.layer.cornerRadius = 16
         blurVisualEffectView.clipsToBounds = true
+        self.loadView = blurVisualEffectView
         
         let loadingIndicator = UIView(frame: CGRect(x: 5, y: 2.5, width: 30, height: 30))
-        loadingIndicator.backgroundColor = .black
+        loadingIndicator.backgroundColor = .white
         loadingIndicator.layer.cornerRadius = 15
         
         let viewController = UIViewController()
@@ -78,10 +70,10 @@ class BaseViewController: UIViewController {
         
         blurVisualEffectView.contentView.addSubview(loadingIndicator)
         self.view.insertSubview(blurVisualEffectView, aboveSubview: subview)
-        
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
-            blurVisualEffectView.removeFromSuperview()
-        }
     }
     
+    public func dismissLoad() {
+        guard let view = self.loadView else { return }
+        view.removeFromSuperview()
+    }
 }
