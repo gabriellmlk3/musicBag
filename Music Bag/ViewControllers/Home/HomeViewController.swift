@@ -42,9 +42,9 @@ class HomeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.showLoad(view: self)
         view.backgroundColor = .backgroundColor
         setupView()
-        self.viewModel.fetchMusics(musics: MusicModel.shared)
         MusicManager.shared.setDelegate(delegate: self)
     }
     
@@ -119,9 +119,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController: HomeViewModelDelegate {
     
     func loadDataDidFinish() {
+        tableView.reloadData()
     }
     
     func loadDataDidFinish(with error: String) {
+        self.showAlert(text: error)
     }
 }
 

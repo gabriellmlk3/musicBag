@@ -32,6 +32,7 @@ class MusicManager {
     var musicID: String?
     var player: AVAudioPlayer?
     var playedViewController: MusicViewController?
+    var dictionary: Dictionary<String, MusicModel>?
     
     func setDelegate(delegate: MusicManagerDelegate) {
         self.delegate = delegate

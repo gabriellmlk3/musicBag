@@ -34,7 +34,7 @@ class TabBar: UITabBarController {
         viewControllers = [
             createNavController(viewController: HomeViewController(), title: "Musics", icon: .homeIcon, index: 0),
             createNavController(viewController: NoPlayingMusicViewController(), title: "", icon: .tabBarPlayIcon, index: 1),
-            createNavController(viewController: ProfileViewController(), title: "Profile", icon: .userIcon, index: 2)
+            createNavController(viewController: LoginViewController(), title: "Login", icon: .userIcon, index: 2)
         ]
         }
     
@@ -62,14 +62,19 @@ class TabBar: UITabBarController {
 extension TabBar: UITabBarControllerDelegate, UINavigationControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        let index = tabBarController.viewControllers?.firstIndex(of: viewController)
+        let index = viewControllers?.firstIndex(of: viewController)
+        guard let fromView = selectedViewController?.view, let toView = viewController.view else { return false }
+        
         if index == 1 {
             guard let musicViewController = MusicManager.shared.playedViewController else { return true }
-            let viewController = musicViewController
             viewController.hidesBottomBarWhenPushed = true
-            let navController = tabBarController.selectedViewController as? UINavigationController
-            navController?.pushViewController(viewController, animated: true)
+            let navController = selectedViewController as? UINavigationController
+            navController?.pushViewController(musicViewController, animated: true)
             return false
+        }
+        
+        if fromView != toView {
+            UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
         }
         return true
     }

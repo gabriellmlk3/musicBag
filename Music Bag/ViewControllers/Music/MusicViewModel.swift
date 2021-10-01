@@ -66,7 +66,9 @@ extension MusicViewModel {
         self.music = music
         
         if let trackURL = music?.trackURL {
-                checkBookFileExists(withLink: trackURL){ [weak self] downloadedURL in
+            guard let url = URL(string: trackURL) else { return }
+            
+                checkBookFileExists(withLink: url) { [weak self] downloadedURL in
                     guard let self = self else{
                         return
                     }

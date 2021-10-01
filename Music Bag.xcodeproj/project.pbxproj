@@ -14,6 +14,9 @@
 		F727B66C26E5A283006D2F3C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B66B26E5A283006D2F3C /* UIColor+Extension.swift */; };
 		F727B66E26E5AA88006D2F3C /* BaseViewAController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B66D26E5AA88006D2F3C /* BaseViewAController.swift */; };
 		F727B67A26E65564006D2F3C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B67926E65564006D2F3C /* UIImage+Extension.swift */; };
+		F77A16E42704E2970090851D /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A16E32704E2970090851D /* Preview.swift */; };
+		F77A17212705DB010090851D /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A17202705DB010090851D /* CollectionTableViewCell.swift */; };
+		F77A172527064ECD0090851D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A172427064ECD0090851D /* LoginViewController.swift */; };
 		F77A486627013FA100FF3538 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A486527013FA100FF3538 /* RegisterViewController.swift */; };
 		F77A486C2701EAC100FF3538 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A486B2701EAC100FF3538 /* CustomTextField.swift */; };
 		F77A486E2701F74E00FF3538 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A486D2701F74D00FF3538 /* CustomButton.swift */; };
@@ -51,6 +54,9 @@
 		F727B66B26E5A283006D2F3C /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F727B66D26E5AA88006D2F3C /* BaseViewAController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewAController.swift; sourceTree = "<group>"; };
 		F727B67926E65564006D2F3C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		F77A16E32704E2970090851D /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		F77A17202705DB010090851D /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
+		F77A172427064ECD0090851D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F77A486527013FA100FF3538 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F77A486B2701EAC100FF3538 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F77A486D2701F74D00FF3538 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -128,6 +134,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		F77A172327064EBD0090851D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F77A172427064ECD0090851D /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		F77A486427013F6800FF3538 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +194,7 @@
 				F7D065C326BDA4F300A31E37 /* ViewControllers */,
 				F7D065C426BDA51200A31E37 /* UIComponents */,
 				F7D065C626BDA54E00A31E37 /* Managers */,
+				F77A16E32704E2970090851D /* Preview.swift */,
 			);
 			path = "Music Bag";
 			sourceTree = "<group>";
@@ -187,6 +202,7 @@
 		F7D065C326BDA4F300A31E37 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F77A172327064EBD0090851D /* Login */,
 				F77A48782703818400FF3538 /* Profile */,
 				F77A486427013F6800FF3538 /* Register */,
 				F7AB5E4226F3A2EA00DF7248 /* Home */,
@@ -204,6 +220,7 @@
 				F77A486B2701EAC100FF3538 /* CustomTextField.swift */,
 				F77A486D2701F74D00FF3538 /* CustomButton.swift */,
 				F77A486F2702011A00FF3538 /* CutomTextFieldView.swift */,
+				F77A17202705DB010090851D /* CollectionTableViewCell.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -391,6 +408,8 @@
 				F7D065A426BD790600A31E37 /* AppDelegate.swift in Sources */,
 				F77A486C2701EAC100FF3538 /* CustomTextField.swift in Sources */,
 				F7E598DA26D674BA00F6BD94 /* Service.swift in Sources */,
+				F77A172527064ECD0090851D /* LoginViewController.swift in Sources */,
+				F77A16E42704E2970090851D /* Preview.swift in Sources */,
 				F77A48762702888F00FF3538 /* UIImage+ResizeImageExtensin.swift in Sources */,
 				F77A487227022F0400FF3538 /* MusicManager.swift in Sources */,
 				F727B67A26E65564006D2F3C /* UIImage+Extension.swift in Sources */,
@@ -398,6 +417,7 @@
 				F77A486E2701F74E00FF3538 /* CustomButton.swift in Sources */,
 				F727B66C26E5A283006D2F3C /* UIColor+Extension.swift in Sources */,
 				F7D065C826BDA58900A31E37 /* APIManager.swift in Sources */,
+				F77A17212705DB010090851D /* CollectionTableViewCell.swift in Sources */,
 				F708978E26FCB70F004973D2 /* FireBaseManager.swift in Sources */,
 				F77A48742702333900FF3538 /* NoPlayingMusicViewController.swift in Sources */,
 			);

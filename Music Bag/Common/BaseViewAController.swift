@@ -22,7 +22,7 @@ class BaseViewController: UIViewController {
         ]
     }
     
-    public func showAlert(with text: String) {
+    public func showAlert(text: String) {
         UIView.animate(withDuration: 5) {
             let blurEffect = UIBlurEffect(style: .dark)
             let blurVisualEffectView = UIVisualEffectView(effect: blurEffect)
@@ -42,7 +42,7 @@ class BaseViewController: UIViewController {
         }
     }
     
-    public func showLoad(subview: UIView) {
+    public func showLoad(view: UIViewController) {
         self.isLoading = true
         
         let blurEffect = UIBlurEffect(style: .dark)
@@ -57,9 +57,6 @@ class BaseViewController: UIViewController {
         loadingIndicator.backgroundColor = .white
         loadingIndicator.layer.cornerRadius = 15
         
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .white.withAlphaComponent(0.1)
-        
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             UIView.animate(withDuration: 1.5, delay: 0, options: [.autoreverse, .repeat]) {
                 loadingIndicator.frame = CGRect(x: 215, y: 2.5, width: 30, height: 30)
@@ -69,7 +66,8 @@ class BaseViewController: UIViewController {
         }
         
         blurVisualEffectView.contentView.addSubview(loadingIndicator)
-        self.view.insertSubview(blurVisualEffectView, aboveSubview: subview)
+        self.present(view, animated: true, completion: nil)
+        
     }
     
     public func dismissLoad() {

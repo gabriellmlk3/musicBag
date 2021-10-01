@@ -8,9 +8,11 @@ target 'Music Bag' do
   # Pods for Music Bag
 
  pod 'Bagel', '~>  1.3.2'
+ pod 'Kingfisher'
  pod 'Firebase/Analytics'
  pod 'Firebase/Database'
  pod 'Firebase/Auth'
  pod 'Firebase/Storage'
+ pod 'Firebase/Firestore'
 
 end
