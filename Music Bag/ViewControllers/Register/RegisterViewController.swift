@@ -53,6 +53,7 @@ class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        title = "Register"
         setupView()
     }
     
@@ -134,16 +135,16 @@ extension RegisterViewController {
     
     @objc
     private func signupUser() {
-        showLoad(subview: view)
+//        showLoad(view: self)
         if verifyPasswords() {
             guard let firstName = firstNameTextFieldView.textField.text, let lastName = lastNameTextFieldView.textField.text, let email = emailTextFieldView.textField.text, let password = passwordTextFieldView.textField.text else { return }
             FireBaseManager.shared.createUser(firstName: firstName, lastName: lastName, email: email, password: password) { success, error in
                 if success && error == nil {
                     self.dismissLoad()
-                    self.showAlert(with: "User created succesfuly")
+                    self.showAlert(text: "User created succesfuly")
                 } else if let error = error {
                     self.dismissLoad()
-                    self.showAlert(with: "Erro on create new user. Error: \(error)")
+                    self.showAlert(text: "Erro on create new user. Error: \(error)")
                 }
             }
         } else {

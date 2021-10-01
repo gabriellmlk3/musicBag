@@ -18,7 +18,7 @@ class HomeViewModel {
     
     var musics: Dictionary = [Int: [MusicModel]]() {
         didSet {
-            delegate.loadDataDidFinish()
+            self.delegate.loadDataDidFinish()
         }
     }
     
@@ -26,6 +26,7 @@ class HomeViewModel {
     
     init(delegate: HomeViewModelDelegate){
         self.delegate = delegate
+        self.fulfillData()
     }
     
     required init?(coder: NSCoder) {
@@ -34,7 +35,7 @@ class HomeViewModel {
     
     func fetchMusics(musics: [MusicModel]) {
         self.dataSource = musics
-        populateDictionary()
+        self.populateDictionary()
     }
     
     private func populateDictionary() {
@@ -46,6 +47,38 @@ class HomeViewModel {
                                         return 1
                                     }
             
+        })
+    }
+    
+    private func fulfillData() {
+        FireBaseManager.shared.readFromFirestore(collection: "Music", completion: { result in
+            switch result {
+            case .failure(let error):
+                self.delegate.loadDataDidFinish(with: error.localizedDescription)
+            case .success(let documents):
+                
+                var musics: [MusicModel] = []
+                
+                for document in documents {
+                    
+                    let documentData = document.data()
+                    let trackName = documentData["track_name"] as? String ?? ""
+                    let trackAuthor = documentData["track_author"] as? String ?? ""
+                    let trackImage = documentData["track_image"] as? String ?? ""
+                    let trackURL = documentData["track_url"] as? String ?? ""
+                    let trackID = document.documentID
+                    
+                    let music = MusicModel(trackName: trackName,
+                                           trackAuthor: trackAuthor,
+                                           trackImage: trackImage,
+                                           trackURL: trackURL,
+                                           trackID: trackID)
+                    
+                    musics.append(music)
+                }
+                
+                self.fetchMusics(musics: musics)
+            }
         })
     }
 

@@ -129,7 +129,7 @@ final class HomeTableViewCell: UITableViewCell {
         setupLayout()
         self.titleLabel.text = music.trackName
         self.authorNameLabel.text = music.trackAuthor
-        self.musicImage.image = music.trackImage
+        self.musicImage.kf.setImage(with: URL(string: music.trackImage))
         self.musicID = music.trackID
         self.isLoved = music.isLoved
     }

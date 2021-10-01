@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Kingfisher
 
 class MusicViewController: BaseViewController, UIScrollViewDelegate {
     
@@ -31,29 +32,29 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
     
-    private lazy var whiteGradientLayer: CAGradientLayer = {
+    private lazy var TopDownGradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame.size = CGSize(width: view.bounds.size.width, height: view.bounds.size.height * 0.15)
         gradientLayer.colors = UIColor.CGBlackScaleTopDown
         return gradientLayer
     }()
     
-    private lazy var whiteGradientView: UIView = {
+    private lazy var TopDownGradientView: UIView = {
         let view = UIView()
-        view.layer.addSublayer(whiteGradientLayer)
+        view.layer.addSublayer(TopDownGradientLayer)
         return view
     }()
     
-    private lazy var blackGradientLayer: CAGradientLayer = {
+    private lazy var DownTopGradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame.size = CGSize(width: view.bounds.size.width, height: view.bounds.size.height * 0.15)
         gradientLayer.colors = UIColor.CGBlackScaleDownTop
         return gradientLayer
     }()
     
-    private lazy var blackGradientView: UIView = {
+    private lazy var DownTopGradientView: UIView = {
         let view = UIView()
-        view.layer.addSublayer(blackGradientLayer)
+        view.layer.addSublayer(DownTopGradientLayer)
         return view
     }()
     
@@ -196,8 +197,8 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         self.viewModel.fetchMusics(music: music, delegate: self)
         self.trackNameLabel.text = music.trackName
         self.authorNameLabel.text = music.trackAuthor
-        self.imageView.image = music.trackImage
-        self.greaterImageView.image = music.trackImage
+        self.imageView.kf.setImage(with: URL(string: music.trackImage))
+        self.greaterImageView.kf.setImage(with: URL(string: music.trackImage))
     }
     
     init(viewModel: MusicViewModel) {
@@ -214,7 +215,7 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(image: .backArrowIcon, style: .plain, target: nil, action: nil)
         view.backgroundColor = .black101112
         Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(update), userInfo: .none, repeats: true)
-        self.showLoad(subview: imageView)
+//        self.showLoad(view: self)
         setupLayout()
     }
 }
@@ -236,7 +237,7 @@ extension MusicViewController: MusicViewModelDelegate {
     
     func loadDataDidFinish(with error: String) {
         DispatchQueue.main.async {
-            self.showAlert(with: error)
+            self.showAlert(text: error)
         }
     }
 }
@@ -303,24 +304,6 @@ extension MusicViewController {
 }
 
 extension MusicViewController {
-    
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "soundName", withExtension: "mp3") else { return }
-
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-
-            viewModel.player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-
-            guard let player = MusicViewModel.shared.player else { return }
-
-            player.play()
-
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
     
     @objc
     private func changeTimeWithSlider() {
@@ -393,15 +376,15 @@ extension MusicViewController {
                 make.centerX.equalToSuperview()
             }
             
-            scrollView.addSubview(whiteGradientView)
-            whiteGradientView.snp.makeConstraints { make in
+            scrollView.addSubview(TopDownGradientView)
+            TopDownGradientView.snp.makeConstraints { make in
                 make.top.equalTo(view)
                 make.leading.trailing.equalToSuperview()
                 make.height.equalTo(view.bounds.size.height * 0.15)
             }
             
-            scrollView.addSubview(blackGradientView)
-            blackGradientView.snp.makeConstraints { make in
+            scrollView.addSubview(DownTopGradientView)
+            DownTopGradientView.snp.makeConstraints { make in
                 make.leading.trailing.equalToSuperview()
                 make.bottom.equalTo(view).offset(-234)
                 make.height.equalTo(view.bounds.size.height * 0.15)
