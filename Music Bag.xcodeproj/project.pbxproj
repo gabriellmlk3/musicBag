@@ -33,13 +33,10 @@
 		F7D065A826BD790600A31E37 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065A726BD790600A31E37 /* MusicViewController.swift */; };
 		F7D065AD26BD790A00A31E37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7D065AC26BD790A00A31E37 /* Assets.xcassets */; };
 		F7D065B026BD790A00A31E37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7D065AE26BD790A00A31E37 /* LaunchScreen.storyboard */; };
-		F7D065BB26BD840D00A31E37 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065BA26BD840D00A31E37 /* Request.swift */; };
 		F7D065BE26BD985C00A31E37 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7D065BD26BD985C00A31E37 /* SnapKit */; };
 		F7D065C026BD99D600A31E37 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065BF26BD99D600A31E37 /* HomeTableViewCell.swift */; };
 		F7D065C826BDA58900A31E37 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065C726BDA58900A31E37 /* APIManager.swift */; };
 		F7D065CA26BDBAE700A31E37 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065C926BDBAE700A31E37 /* NetworkManager.swift */; };
-		F7D065D226BE246D00A31E37 /* MusicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065D126BE246D00A31E37 /* MusicViewModel.swift */; };
-		F7DBF40326F93472002C7864 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DBF40226F93472002C7864 /* HomeViewModel.swift */; };
 		F7DBF40526F9451C002C7864 /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DBF40426F9451C002C7864 /* HomeSectionHeaderView.swift */; };
 		F7E598DA26D674BA00F6BD94 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E598D926D674BA00F6BD94 /* Service.swift */; };
 		F7FC156226FE14CB00E8D279 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC156126FE14CB00E8D279 /* TabBar.swift */; };
@@ -75,13 +72,10 @@
 		F7D065A726BD790600A31E37 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		F7D065AC26BD790A00A31E37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7D065AF26BD790A00A31E37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F7D065BA26BD840D00A31E37 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		F7D065BF26BD99D600A31E37 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		F7D065C726BDA58900A31E37 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		F7D065C926BDBAE700A31E37 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F7D065CC26BDBE7F00A31E37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/premier/musicBag/Music Bag/Common/Info.plist"; sourceTree = "<absolute>"; };
-		F7D065D126BE246D00A31E37 /* MusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewModel.swift; sourceTree = "<group>"; };
-		F7DBF40226F93472002C7864 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F7DBF40426F9451C002C7864 /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
 		F7E598D926D674BA00F6BD94 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		F7FC156126FE14CB00E8D279 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -173,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				F7AB5E4326F3A30000DF7248 /* HomeViewController.swift */,
-				F7DBF40226F93472002C7864 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -242,7 +235,6 @@
 				F7D065A526BD790600A31E37 /* SceneDelegate.swift */,
 				F7D065AC26BD790A00A31E37 /* Assets.xcassets */,
 				F7D065AE26BD790A00A31E37 /* LaunchScreen.storyboard */,
-				F7D065BA26BD840D00A31E37 /* Request.swift */,
 				F7D065CC26BDBE7F00A31E37 /* Info.plist */,
 				F727B66526E59D78006D2F3C /* GoogleService-Info.plist */,
 				F727B66D26E5AA88006D2F3C /* BaseViewAController.swift */,
@@ -268,7 +260,6 @@
 			children = (
 				F77A1729270B3A510090851D /* Cell */,
 				F7D065A726BD790600A31E37 /* MusicViewController.swift */,
-				F7D065D126BE246D00A31E37 /* MusicViewModel.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -403,15 +394,12 @@
 			files = (
 				F7D065C026BD99D600A31E37 /* HomeTableViewCell.swift in Sources */,
 				F7FC156226FE14CB00E8D279 /* TabBar.swift in Sources */,
-				F7DBF40326F93472002C7864 /* HomeViewModel.swift in Sources */,
 				F7D065A826BD790600A31E37 /* MusicViewController.swift in Sources */,
 				F727B66E26E5AA88006D2F3C /* BaseViewAController.swift in Sources */,
 				F77A487A2703819A00FF3538 /* ProfileViewController.swift in Sources */,
-				F7D065D226BE246D00A31E37 /* MusicViewModel.swift in Sources */,
 				F7AB5E4426F3A30000DF7248 /* HomeViewController.swift in Sources */,
 				F77A48702702011A00FF3538 /* CutomTextFieldView.swift in Sources */,
 				F77A172F270C67790090851D /* SpinnerLoadView.swift in Sources */,
-				F7D065BB26BD840D00A31E37 /* Request.swift in Sources */,
 				F7D065CA26BDBAE700A31E37 /* NetworkManager.swift in Sources */,
 				F7DBF40526F9451C002C7864 /* HomeSectionHeaderView.swift in Sources */,
 				F77A486627013FA100FF3538 /* RegisterViewController.swift in Sources */,

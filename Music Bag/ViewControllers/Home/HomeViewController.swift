@@ -9,8 +9,6 @@ import UIKit
 
 class HomeViewController: BaseViewController {
     
-    private lazy var viewModel = HomeViewModel(delegate: self)
-    
     private var hasLovedTrack: [MusicModel]?
     
     private let scrollView: UIScrollView = {
@@ -21,7 +19,6 @@ class HomeViewController: BaseViewController {
     private var segmentControll: UISegmentedControl = {
         let segmentControll = UISegmentedControl()
         segmentControll.layer.cornerRadius = 0
-        segmentControll.selectedSegmentIndex = 0
         segmentControll.insertSegment(withTitle: "Musics", at: 0, animated: true)
         segmentControll.insertSegment(withTitle: "Loved", at: 1, animated: true)
         segmentControll.selectedSegmentTintColor = .gray
@@ -42,10 +39,10 @@ class HomeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.showLoad(view: self)
         view.backgroundColor = .backgroundColor
         setupView()
-        MusicManager.shared.setDelegate(delegate: self)
+        self.showLoad()
+        MusicManager.shared.attach(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,23 +74,27 @@ class HomeViewController: BaseViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let musics = viewModel.musics[section] else { return 0 }
-        let lovedMusics = MusicManager.shared.lovedMusicID
-        
-        if section == 0 {
-            return lovedMusics.count
-        } else {
-            return musics.count
-        }
+        return MusicManager.shared.musics.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? HomeTableViewCell,
-              let music = viewModel.musics[indexPath.section]?[indexPath.row] else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
+        let music = MusicManager.shared.musics[indexPath.row]
+        let musicCount = MusicManager.shared.musics.count
+        
+        if indexPath.row == musicCount - 1 {
+            let bezierPath = UIBezierPath(rect: CGRect(x: 0, y: cell.bounds.height / 2, width: cell.bounds.width, height: cell.bounds.height / 2))
+            cell.addShadow(shadowOpacity: 0.6, shadowRadius: 5, with: bezierPath)
+        }
+        
         let view = UIView()
         view.backgroundColor = .black101112
         cell.selectedBackgroundView = view
@@ -102,33 +103,30 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let music = viewModel.musics[indexPath.section]?[indexPath.row] else { return }
-        var viewController = MusicViewController(music: music)
+        let music = MusicManager.shared.musics[indexPath.row]
+        var viewController: UIViewController
         if MusicManager.shared.musicID == music.trackID {
-            guard let musicViewController = MusicManager.shared.playedViewController else { return }
+            guard let musicViewController = MusicManager.shared.lastPlayedViewController else { return }
             viewController = musicViewController
         } else {
             viewController = MusicViewController(music: music)
         }
         viewController.modalPresentationStyle = .automatic
         viewController.hidesBottomBarWhenPushed = true
-        self.navigationController?.present(viewController, animated: true)
-    }
-}
-
-extension HomeViewController: HomeViewModelDelegate {
-    
-    func loadDataDidFinish() {
-        tableView.reloadData()
-    }
-    
-    func loadDataDidFinish(with error: String) {
-        self.showAlert(text: error)
+        
+        if FireBaseManager.shared.auth.currentUser != nil {
+            self.navigationController?.present(viewController, animated: true)
+        } else {
+            self.showAlert(text: "You must be logged")
+        }
+        
     }
 }
 
 extension HomeViewController: MusicManagerDelegate {
-    func refresh() {
+
+    func update(subject: MusicManager) {
+        self.dismissLoad()
         tableView.reloadData()
     }
     

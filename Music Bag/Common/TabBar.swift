@@ -71,7 +71,7 @@ extension TabBar: UITabBarControllerDelegate, UINavigationControllerDelegate {
         guard let fromView = selectedViewController?.view, let toView = viewController.view else { return false }
         
         if index == 1 {
-            if let musicViewController = MusicManager.shared.playedViewController {
+            if let musicViewController = MusicManager.shared.lastPlayedViewController {
                 viewController.hidesBottomBarWhenPushed = true
                 let navController = selectedViewController as? UINavigationController
                 navController?.pushViewController(musicViewController, animated: true)

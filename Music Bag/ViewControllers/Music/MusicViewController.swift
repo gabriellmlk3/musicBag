@@ -14,20 +14,23 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
 //MARK: - Attributes
     private var lastTitle = String()
     private var lastLargeTitle = true
-    private lazy var viewModel = MusicViewModel.shared
     
     private var isPlaying = false {
         didSet {
             if self.isPlaying {
                 self.playPauseButton.setImage(.pauseIcon, for: .normal)
-                self.viewModel.play()
-                MusicManager.shared.playedViewController = self
-                MusicManager.shared.musicID = viewModel.music?.trackID
-                MusicManager.shared.isPlaying = true
+                MusicManager.shared.play()
+                MusicManager.shared.lastPlayedViewController = self
+                MusicManager.shared.musicID = MusicManager.shared.playingMusic?.trackID
+                if !MusicManager.shared.hasPlayingMusic {
+                    MusicManager.shared.hasPlayingMusic = true
+                }
             } else {
                 self.playPauseButton.setImage(.playIcon, for: .normal)
-                self.viewModel.pause()
-                MusicManager.shared.isPlaying = false
+                MusicManager.shared.pause()
+                if MusicManager.shared.hasPlayingMusic {
+                    MusicManager.shared.hasPlayingMusic = false
+                }
             }
         }
     }
@@ -125,7 +128,7 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
     
     private lazy var trackCurrentTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = viewModel.totalTime >= 3600 ? "00:00:00" : "00:00"
+        label.text = MusicManager.shared.totalTime >= 3600 ? "00:00:00" : "00:00"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -134,7 +137,7 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
     
     private lazy var trackRemainingTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = viewModel.totalTime >= 3600 ? "00:00:00" : "00:00"
+        label.text = MusicManager.shared.totalTime >= 3600 ? "00:00:00" : "00:00"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -196,7 +199,7 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
     
     private lazy var loveButtonItem: UIButton = {
         let buttonItem = UIButton()
-        guard let music = MusicViewModel.shared.music else { return buttonItem }
+        guard let music = MusicManager.shared.playingMusic else { return buttonItem }
         buttonItem.setImage(music.isLoved ? .filledHeartCircleIcon : .heartCircleIcon, for: .normal)
         buttonItem.addTarget(self, action: #selector(toggleLoveButton), for: .touchUpInside)
         buttonItem.tintColor = music.isLoved ? .systemRed : .white
@@ -208,18 +211,12 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
     //MARK: - Initializers
     init(music: MusicModel) {
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.fetchMusics(music: music, delegate: self)
+        MusicManager.shared.fetchMusics(music: music)
+        self.progressSlider.maximumValue = Float(MusicManager.shared.totalTime)
         self.trackNameLabel.text = music.trackName
         self.authorNameLabel.text = music.trackAuthor
         self.imageView.kf.setImage(with: URL(string: music.trackImage))
         self.greaterImageView.kf.setImage(with: URL(string: music.trackImage))
-        print("Music Initied with Music")
-    }
-    
-    init(viewModel: MusicViewModel) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
-        print("Music Initied with viewModel")
     }
     
     deinit {
@@ -234,30 +231,8 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(image: .backArrowIcon, style: .plain, target: nil, action: nil)
         view.backgroundColor = .black101112
-        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(update), userInfo: .none, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTrack), userInfo: .none, repeats: true)
         setupLayout()
-    }
-}
-
-//MARK: - HomeViewDelegate
-extension MusicViewController: MusicViewModelDelegate {
-    
-    func updateSliderWithTotalTime() {
-        self.progressSlider.maximumValue = Float(viewModel.totalTime)
-    }
-    
-    func updatePlayer() {
-        update()
-    }
-    
-    func loadDataDidFinish() {
-        self.dismissLoad()
-    }
-    
-    func loadDataDidFinish(with error: String) {
-        DispatchQueue.main.async {
-            self.showAlert(text: error)
-        }
     }
 }
 
@@ -265,19 +240,19 @@ extension MusicViewController: MusicViewModelDelegate {
 extension MusicViewController {
     
     @objc
-    private func update() {
-        guard var currentTime = MusicViewModel.shared.player?.currentTime else { return }
+    private func updateTrack() {
+        var currentTime = MusicManager.shared.currentTime
         if currentTime == 0 {
             isPlaying = false
         }
         if currentTime < 0 {
             currentTime = 0.0
-        } else if currentTime > viewModel.totalTime {
-            currentTime = viewModel.totalTime
+        } else if currentTime > MusicManager.shared.totalTime {
+            currentTime = MusicManager.shared.totalTime
         }
         
         trackCurrentTimeLabel.text = self.timeFormatted(Int(currentTime))
-        trackRemainingTimeLabel.text = self.timeFormatted(Int(viewModel.totalTime - currentTime))
+        trackRemainingTimeLabel.text = self.timeFormatted(Int(MusicManager.shared.totalTime - currentTime))
         
         UIView.animate(withDuration: 0.9) {
             self.progressSlider.setValue(Float(currentTime), animated: true)
@@ -286,28 +261,29 @@ extension MusicViewController {
     
     @objc
     private func backwardTrack() {
-        viewModel.player?.currentTime = 0.0
-        update()
+        MusicManager.shared.player?.currentTime = 0.0
+        updateTrack()
     }
     
     @objc
     private func forwardTrack() {
-        update()
+        MusicManager.shared.player?.currentTime = MusicManager.shared.totalTime
+        updateTrack()
     }
     
     @objc
     private func backward5SecTrack() {
-        guard let currentTime = MusicViewModel.shared.player?.currentTime else { return }
+        guard let currentTime = MusicManager.shared.player?.currentTime else { return }
         if currentTime > 0 {
-            viewModel.player?.currentTime -= 5.0
+            MusicManager.shared.player?.currentTime -= 5.0
         }
-        update()
+        updateTrack()
     }
     
     @objc
     private func forward5SecTrack() {
-        if viewModel.CurrenTime < viewModel.totalTime { viewModel.player?.currentTime += 5.0 }
-        update()
+        if MusicManager.shared.currentTime < MusicManager.shared.totalTime { MusicManager.shared.player?.currentTime += 5.0 }
+        updateTrack()
     }
     
     @objc
@@ -325,7 +301,7 @@ extension MusicViewController {
         let minutes: Int = (totalSeconds / 60) % 60
         let hours: Int = (totalSeconds / 60) / 60
         
-        if viewModel.totalTime >= 3600 {
+        if MusicManager.shared.totalTime >= 3600 {
             return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         } else {
             return String(format: "%02d:%02d", minutes, seconds)
@@ -338,25 +314,25 @@ extension MusicViewController {
     
     @objc
     private func changeTimeWithSlider() {
-        viewModel.player?.currentTime = TimeInterval(progressSlider.value)
+        MusicManager.shared.player?.currentTime = TimeInterval(progressSlider.value)
     }
     
     @objc
     private func toggleLoveButton() {
-        guard let music = MusicViewModel.shared.music else { return }
+        guard let music = MusicManager.shared.playingMusic else { return }
         if music.isLoved {
             self.loveButtonItem.tintColor = .white
             self.loveButtonItem.setImage(UIImage.heartCircleIcon, for: .normal)
             music.isLoved = false
             guard let index = MusicManager.shared.lovedMusicID.firstIndex(of: music.trackID) else { return }
             MusicManager.shared.lovedMusicID.remove(at: index)
-            MusicManager.shared.isLoved = false
+            MusicManager.shared.playingMusic?.isLoved = false
         } else {
             self.loveButtonItem.tintColor = .systemRed
             self.loveButtonItem.setImage(UIImage.filledHeartCircleIcon, for: .normal)
             music.isLoved = true
             MusicManager.shared.lovedMusicID.append(music.trackID)
-            MusicManager.shared.isLoved = true
+            MusicManager.shared.playingMusic?.isLoved = true
         }
     }
 }
