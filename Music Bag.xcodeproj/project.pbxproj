@@ -10,13 +10,14 @@
 		DEAF3C338DFD4D2A6BBB01F0 /* Pods_Music_Bag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23E69841B4DC4B82A90D632 /* Pods_Music_Bag.framework */; };
 		F708978E26FCB70F004973D2 /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F708978D26FCB70F004973D2 /* FireBaseManager.swift */; };
 		F727B66626E59D78006D2F3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F727B66526E59D78006D2F3C /* GoogleService-Info.plist */; };
-		F727B66926E59F2E006D2F3C /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B66826E59F2E006D2F3C /* AudioModel.swift */; };
 		F727B66C26E5A283006D2F3C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B66B26E5A283006D2F3C /* UIColor+Extension.swift */; };
 		F727B66E26E5AA88006D2F3C /* BaseViewAController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B66D26E5AA88006D2F3C /* BaseViewAController.swift */; };
 		F727B67A26E65564006D2F3C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B67926E65564006D2F3C /* UIImage+Extension.swift */; };
 		F77A16E42704E2970090851D /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A16E32704E2970090851D /* Preview.swift */; };
 		F77A17212705DB010090851D /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A17202705DB010090851D /* CollectionTableViewCell.swift */; };
 		F77A172527064ECD0090851D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A172427064ECD0090851D /* LoginViewController.swift */; };
+		F77A172B270BB0680090851D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A172A270BB0670090851D /* UIView+Extension.swift */; };
+		F77A172F270C67790090851D /* SpinnerLoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A172E270C67790090851D /* SpinnerLoadView.swift */; };
 		F77A486627013FA100FF3538 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A486527013FA100FF3538 /* RegisterViewController.swift */; };
 		F77A486C2701EAC100FF3538 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A486B2701EAC100FF3538 /* CustomTextField.swift */; };
 		F77A486E2701F74E00FF3538 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A486D2701F74D00FF3538 /* CustomButton.swift */; };
@@ -50,13 +51,14 @@
 		F23E69841B4DC4B82A90D632 /* Pods_Music_Bag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Music_Bag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F708978D26FCB70F004973D2 /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FireBaseManager.swift; path = ../../../Documents/FireBaseManager.swift; sourceTree = "<group>"; };
 		F727B66526E59D78006D2F3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F727B66826E59F2E006D2F3C /* AudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
 		F727B66B26E5A283006D2F3C /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F727B66D26E5AA88006D2F3C /* BaseViewAController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewAController.swift; sourceTree = "<group>"; };
 		F727B67926E65564006D2F3C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		F77A16E32704E2970090851D /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		F77A17202705DB010090851D /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		F77A172427064ECD0090851D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F77A172A270BB0670090851D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		F77A172E270C67790090851D /* SpinnerLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerLoadView.swift; sourceTree = "<group>"; };
 		F77A486527013FA100FF3538 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F77A486B2701EAC100FF3538 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F77A486D2701F74D00FF3538 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -118,7 +120,6 @@
 		F727B66726E59F19006D2F3C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F727B66826E59F2E006D2F3C /* AudioModel.swift */,
 				F7AB5E5326F4DF2100DF7248 /* MusicModel.swift */,
 			);
 			path = Models;
@@ -130,6 +131,7 @@
 				F727B66B26E5A283006D2F3C /* UIColor+Extension.swift */,
 				F727B67926E65564006D2F3C /* UIImage+Extension.swift */,
 				F77A48752702888F00FF3538 /* UIImage+ResizeImageExtensin.swift */,
+				F77A172A270BB0670090851D /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -140,6 +142,15 @@
 				F77A172427064ECD0090851D /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		F77A1729270B3A510090851D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F7D065BF26BD99D600A31E37 /* HomeTableViewCell.swift */,
+				F7DBF40426F9451C002C7864 /* HomeSectionHeaderView.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		F77A486427013F6800FF3538 /* Register */ = {
@@ -215,12 +226,11 @@
 		F7D065C426BDA51200A31E37 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				F7D065BF26BD99D600A31E37 /* HomeTableViewCell.swift */,
-				F7DBF40426F9451C002C7864 /* HomeSectionHeaderView.swift */,
 				F77A486B2701EAC100FF3538 /* CustomTextField.swift */,
 				F77A486D2701F74D00FF3538 /* CustomButton.swift */,
 				F77A486F2702011A00FF3538 /* CutomTextFieldView.swift */,
 				F77A17202705DB010090851D /* CollectionTableViewCell.swift */,
+				F77A172E270C67790090851D /* SpinnerLoadView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -256,6 +266,7 @@
 		F7D065CF26BDCA5900A31E37 /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				F77A1729270B3A510090851D /* Cell */,
 				F7D065A726BD790600A31E37 /* MusicViewController.swift */,
 				F7D065D126BE246D00A31E37 /* MusicViewModel.swift */,
 			);
@@ -394,12 +405,12 @@
 				F7FC156226FE14CB00E8D279 /* TabBar.swift in Sources */,
 				F7DBF40326F93472002C7864 /* HomeViewModel.swift in Sources */,
 				F7D065A826BD790600A31E37 /* MusicViewController.swift in Sources */,
-				F727B66926E59F2E006D2F3C /* AudioModel.swift in Sources */,
 				F727B66E26E5AA88006D2F3C /* BaseViewAController.swift in Sources */,
 				F77A487A2703819A00FF3538 /* ProfileViewController.swift in Sources */,
 				F7D065D226BE246D00A31E37 /* MusicViewModel.swift in Sources */,
 				F7AB5E4426F3A30000DF7248 /* HomeViewController.swift in Sources */,
 				F77A48702702011A00FF3538 /* CutomTextFieldView.swift in Sources */,
+				F77A172F270C67790090851D /* SpinnerLoadView.swift in Sources */,
 				F7D065BB26BD840D00A31E37 /* Request.swift in Sources */,
 				F7D065CA26BDBAE700A31E37 /* NetworkManager.swift in Sources */,
 				F7DBF40526F9451C002C7864 /* HomeSectionHeaderView.swift in Sources */,
@@ -416,6 +427,7 @@
 				F7D065A626BD790600A31E37 /* SceneDelegate.swift in Sources */,
 				F77A486E2701F74E00FF3538 /* CustomButton.swift in Sources */,
 				F727B66C26E5A283006D2F3C /* UIColor+Extension.swift in Sources */,
+				F77A172B270BB0680090851D /* UIView+Extension.swift in Sources */,
 				F7D065C826BDA58900A31E37 /* APIManager.swift in Sources */,
 				F77A17212705DB010090851D /* CollectionTableViewCell.swift in Sources */,
 				F708978E26FCB70F004973D2 /* FireBaseManager.swift in Sources */,

@@ -32,15 +32,23 @@ class LoginViewController: BaseViewController {
         button.backgroundColor = .clear
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(openRegisterView), for: .touchUpInside)
-        button.setAttributedTitle(NSAttributedString(string: "No have account? No problem!",
+        button.setAttributedTitle(NSAttributedString(string: "Have no account? No problem!",
                                                      attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold)]), for: .normal)
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    init() {
+        super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .backgroundColor
         setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     private func setupView() {

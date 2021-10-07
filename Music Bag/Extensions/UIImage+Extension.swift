@@ -49,6 +49,14 @@ extension UIImage {
         return UIImage(named: "circlebadge") ?? UIImage()
     }
     
+    open class var eyeIcon: UIImage {
+        return UIImage(named: "eyeIcon")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
+    }
+    
+    open class var eyeSlashIcon: UIImage {
+        return UIImage(named: "eyeSlashIcon")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
+    }
+    
     open class var userIcon: UIImage {
         return UIImage(named: "userIcon")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
     }

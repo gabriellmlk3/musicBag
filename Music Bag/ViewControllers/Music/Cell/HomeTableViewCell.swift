@@ -74,7 +74,7 @@ final class HomeTableViewCell: UITableViewCell {
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.size.equalTo(80)
+            make.width.equalTo(80)
         }
         
         self.addSubview(titleLabel)

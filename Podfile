@@ -14,5 +14,6 @@ target 'Music Bag' do
  pod 'Firebase/Auth'
  pod 'Firebase/Storage'
  pod 'Firebase/Firestore'
+ pod 'IQKeyboardManagerSwift'
 
 end

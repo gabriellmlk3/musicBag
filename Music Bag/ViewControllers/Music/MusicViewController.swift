@@ -77,10 +77,14 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         return imageView
     }()
     
+    private var imageContainerHeaderShadowView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     private var imageContainerHeaderView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
-        view.layer.cornerRadius = 16
         return view
     }()
     
@@ -119,9 +123,18 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         return view
     }()
     
-    private var trackTimeLabel: UILabel = {
+    private lazy var trackCurrentTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "00:00:00"
+        label.text = viewModel.totalTime >= 3600 ? "00:00:00" : "00:00"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    
+    private lazy var trackRemainingTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = viewModel.totalTime >= 3600 ? "00:00:00" : "00:00"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -187,9 +200,10 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         buttonItem.setImage(music.isLoved ? .filledHeartCircleIcon : .heartCircleIcon, for: .normal)
         buttonItem.addTarget(self, action: #selector(toggleLoveButton), for: .touchUpInside)
         buttonItem.tintColor = music.isLoved ? .systemRed : .white
+        buttonItem.imageView?.clipsToBounds = false
+        buttonItem.imageView?.addShadow(shadowOpacity: 1, shadowRadius: 5)
         return buttonItem
     }()
-    
     
     //MARK: - Initializers
     init(music: MusicModel) {
@@ -199,11 +213,17 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         self.authorNameLabel.text = music.trackAuthor
         self.imageView.kf.setImage(with: URL(string: music.trackImage))
         self.greaterImageView.kf.setImage(with: URL(string: music.trackImage))
+        print("Music Initied with Music")
     }
     
     init(viewModel: MusicViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        print("Music Initied with viewModel")
+    }
+    
+    deinit {
+        print("Music Deinited")
     }
     
     required init?(coder: NSCoder) {
@@ -215,7 +235,6 @@ class MusicViewController: BaseViewController, UIScrollViewDelegate {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(image: .backArrowIcon, style: .plain, target: nil, action: nil)
         view.backgroundColor = .black101112
         Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(update), userInfo: .none, repeats: true)
-//        self.showLoad(view: self)
         setupLayout()
     }
 }
@@ -248,10 +267,17 @@ extension MusicViewController {
     @objc
     private func update() {
         guard var currentTime = MusicViewModel.shared.player?.currentTime else { return }
-        if currentTime == viewModel.totalTime { isPlaying = false }
-        if currentTime < 0 { currentTime = 0.0} else if currentTime > viewModel.totalTime { currentTime = viewModel.totalTime }
+        if currentTime == 0 {
+            isPlaying = false
+        }
+        if currentTime < 0 {
+            currentTime = 0.0
+        } else if currentTime > viewModel.totalTime {
+            currentTime = viewModel.totalTime
+        }
         
-        trackTimeLabel.text = self.timeFormatted(Int(currentTime))
+        trackCurrentTimeLabel.text = self.timeFormatted(Int(currentTime))
+        trackRemainingTimeLabel.text = self.timeFormatted(Int(viewModel.totalTime - currentTime))
         
         UIView.animate(withDuration: 0.9) {
             self.progressSlider.setValue(Float(currentTime), animated: true)
@@ -298,7 +324,12 @@ extension MusicViewController {
         let seconds: Int = totalSeconds % 60
         let minutes: Int = (totalSeconds / 60) % 60
         let hours: Int = (totalSeconds / 60) / 60
-        return String(format: "%02d:%02d:%02d", hours ,minutes, seconds)
+        
+        if viewModel.totalTime >= 3600 {
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
     }
     
 }
@@ -351,12 +382,17 @@ extension MusicViewController {
                 make.edges.equalToSuperview()
             }
             
-            blurVisualEffectView.contentView.addSubview(imageContainerHeaderView)
-            imageContainerHeaderView.snp.makeConstraints { make in
+            blurVisualEffectView.contentView.addSubview(imageContainerHeaderShadowView)
+            imageContainerHeaderShadowView.snp.makeConstraints { make in
                 make.centerY.equalTo(blurVisualEffectView).offset(-100)
                 make.leading.equalToSuperview().offset(5)
                 make.trailing.equalToSuperview().offset(-5)
                 make.height.equalTo(400)
+            }
+            
+            imageContainerHeaderShadowView.addSubview(imageContainerHeaderView)
+            imageContainerHeaderView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
             }
             
             imageContainerHeaderView.addSubview(imageView)
@@ -370,10 +406,12 @@ extension MusicViewController {
                 make.width.equalTo(view.bounds.width)
             }
             
-            scrollView.addSubview(loveButtonItem)
-            loveButtonItem.snp.makeConstraints { make in
-                make.top.equalTo(imageContainerHeaderView.snp.bottom).offset(20)
-                make.centerX.equalToSuperview()
+            if FireBaseManager.shared.auth.currentUser != nil {
+                scrollView.addSubview(loveButtonItem)
+                loveButtonItem.snp.makeConstraints { make in
+                    make.top.equalTo(imageContainerHeaderView.snp.bottom).offset(20)
+                    make.centerX.equalToSuperview()
+                }
             }
             
             scrollView.addSubview(TopDownGradientView)
@@ -446,10 +484,16 @@ extension MusicViewController {
                 make.size.equalTo(20)
             }
             
-            playerConteiner.addSubview(trackTimeLabel)
-            trackTimeLabel.snp.makeConstraints { make in
+            playerConteiner.addSubview(trackCurrentTimeLabel)
+            trackCurrentTimeLabel.snp.makeConstraints { make in
                 make.bottom.equalTo(playerConteiner.snp.top).offset(-5)
                 make.leading.equalToSuperview().offset(10)
+            }
+            
+            playerConteiner.addSubview(trackRemainingTimeLabel)
+            trackRemainingTimeLabel.snp.makeConstraints { make in
+                make.bottom.equalTo(playerConteiner.snp.top).offset(-5)
+                make.trailing.equalToSuperview().offset(-10)
             }
             
             playerConteiner.addSubview(backward5SecButton)

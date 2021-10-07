@@ -38,7 +38,6 @@ class CollectionTableViewCell: UITableViewCell {
         addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.top.bottom.leading.equalToSuperview()
-            make.height.equalTo(80)
         }
     }
 }
