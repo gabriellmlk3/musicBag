@@ -19,14 +19,19 @@ class TabBar: UITabBarController {
     }
     
     override func viewDidLayoutSubviews() {
-            super.viewDidLayoutSubviews()
-
-            let tabBarHeight: CGFloat = 100
-            var tabFrame = tabBar.frame
-            tabFrame.size.height = tabBarHeight
-            tabFrame.origin.y = view.frame.size.height - tabBarHeight
-            tabBar.frame = tabFrame
+        super.viewDidLayoutSubviews()
+        
+        let tabBarHeight: CGFloat = 70
+        var tabFrame = tabBar.frame
+        tabFrame.size.height = tabBarHeight
+        tabFrame.origin.y = view.frame.size.height - tabBarHeight
+        tabBar.frame = tabFrame
+        
+        guard let items = self.tabBar.items else { return }
+        for item in items {
+            item.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -20, right: 0)
         }
+    }
     
     func setupViewControllers() {
         modalPresentationStyle = .fullScreen
@@ -66,15 +71,16 @@ extension TabBar: UITabBarControllerDelegate, UINavigationControllerDelegate {
         guard let fromView = selectedViewController?.view, let toView = viewController.view else { return false }
         
         if index == 1 {
-            guard let musicViewController = MusicManager.shared.playedViewController else { return true }
-            viewController.hidesBottomBarWhenPushed = true
-            let navController = selectedViewController as? UINavigationController
-            navController?.pushViewController(musicViewController, animated: true)
-            return false
+            if let musicViewController = MusicManager.shared.lastPlayedViewController {
+                viewController.hidesBottomBarWhenPushed = true
+                let navController = selectedViewController as? UINavigationController
+                navController?.pushViewController(musicViewController, animated: true)
+                return false
+            }
         }
         
         if fromView != toView {
-            UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
+            UIView.transition(from: fromView, to: toView, duration: 0.3, options: [.transitionCrossDissolve], completion: nil)
         }
         return true
     }

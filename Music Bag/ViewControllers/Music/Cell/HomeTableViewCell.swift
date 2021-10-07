@@ -74,7 +74,7 @@ final class HomeTableViewCell: UITableViewCell {
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.size.equalTo(80)
+            make.width.equalTo(80)
         }
         
         self.addSubview(titleLabel)
@@ -103,10 +103,10 @@ final class HomeTableViewCell: UITableViewCell {
             isLovedIndicator.removeFromSuperview()
         }
         
-        if  MusicManager.shared.isPlaying && MusicManager.shared.musicID == musicID {
+        if  MusicManager.shared.hasPlayingMusic && MusicManager.shared.musicID == musicID {
             self.addSubview(isPlayingIndicator)
             isPlayingIndicator.snp.makeConstraints { make in
-                make.trailing.equalTo(MusicManager.shared.isLoved ? isLovedIndicator.snp.leading : self).offset(-15)
+                make.trailing.equalTo(MusicManager.shared.playingMusic?.isLoved ?? false ? isLovedIndicator.snp.leading : self).offset(-15)
                 make.centerY.equalToSuperview()
                 make.height.equalTo(20)
                 make.width.equalTo(20)

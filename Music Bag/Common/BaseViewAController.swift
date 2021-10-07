@@ -10,7 +10,14 @@ import UIKit
 class BaseViewController: UIViewController {
     
     var isLoading: Bool = false
-    var loadView: UIView?
+    
+    private lazy var loadContainerView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        view.backgroundColor = .gray.withAlphaComponent(0.3)
+        return view
+    }()
+    
+    private lazy var loadView = SpinnerView(frame: CGRect(x: self.loadContainerView.bounds.width / 2 - 50, y: self.loadContainerView.bounds.height / 2 - 50, width: 100, height: 100))
     
     public func setNormalNavigationController(title: String?) {
         navigationController?.navigationItem.title = title
@@ -23,55 +30,21 @@ class BaseViewController: UIViewController {
     }
     
     public func showAlert(text: String) {
-        UIView.animate(withDuration: 5) {
-            let blurEffect = UIBlurEffect(style: .dark)
-            let blurVisualEffectView = UIVisualEffectView(effect: blurEffect)
-            
-            self.view.addSubview(blurVisualEffectView)
-            blurVisualEffectView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-            
-            let alertController = UIAlertController.init(title: "Atenção", message: text, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                blurVisualEffectView.removeFromSuperview()
-            }))
-            
-            self.view.addSubview(blurVisualEffectView)
-            self.present(alertController, animated: true, completion: nil)
-        }
+        let alertController = UIAlertController.init(title: "Warning", message: text, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            alertController.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    public func showLoad(view: UIViewController) {
-        self.isLoading = true
-        
-        let blurEffect = UIBlurEffect(style: .dark)
-        
-        let blurVisualEffectView = UIVisualEffectView(effect: blurEffect)
-        blurVisualEffectView.frame = CGRect(x: 90, y: 400, width: 250, height: 35)
-        blurVisualEffectView.layer.cornerRadius = 16
-        blurVisualEffectView.clipsToBounds = true
-        self.loadView = blurVisualEffectView
-        
-        let loadingIndicator = UIView(frame: CGRect(x: 5, y: 2.5, width: 30, height: 30))
-        loadingIndicator.backgroundColor = .white
-        loadingIndicator.layer.cornerRadius = 15
-        
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            UIView.animate(withDuration: 1.5, delay: 0, options: [.autoreverse, .repeat]) {
-                loadingIndicator.frame = CGRect(x: 215, y: 2.5, width: 30, height: 30)
-            } completion: { (_) in
-                loadingIndicator.frame = CGRect(x: 90, y: 400, width: 250, height: 35)
-            }
-        }
-        
-        blurVisualEffectView.contentView.addSubview(loadingIndicator)
-        self.present(view, animated: true, completion: nil)
-        
+    public func showLoad() {
+        loadContainerView.addSubview(loadView)
+        view.addSubview(loadContainerView)
+        self.tabBarController?.tabBar.layer.zPosition = -1
     }
     
     public func dismissLoad() {
-        guard let view = self.loadView else { return }
-        view.removeFromSuperview()
+        loadContainerView.removeFromSuperview()
+        self.tabBarController?.tabBar.layer.zPosition = 0
     }
 }

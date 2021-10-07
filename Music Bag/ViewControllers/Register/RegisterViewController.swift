@@ -135,7 +135,6 @@ extension RegisterViewController {
     
     @objc
     private func signupUser() {
-//        showLoad(view: self)
         if verifyPasswords() {
             guard let firstName = firstNameTextFieldView.textField.text, let lastName = lastNameTextFieldView.textField.text, let email = emailTextFieldView.textField.text, let password = passwordTextFieldView.textField.text else { return }
             FireBaseManager.shared.createUser(firstName: firstName, lastName: lastName, email: email, password: password) { success, error in
