@@ -13,6 +13,8 @@
 		F727B66C26E5A283006D2F3C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B66B26E5A283006D2F3C /* UIColor+Extension.swift */; };
 		F727B66E26E5AA88006D2F3C /* BaseViewAController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B66D26E5AA88006D2F3C /* BaseViewAController.swift */; };
 		F727B67A26E65564006D2F3C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727B67926E65564006D2F3C /* UIImage+Extension.swift */; };
+		F76212D92710811F00F5AD87 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76212D82710811F00F5AD87 /* ContainerViewController.swift */; };
+		F76212DB271087D600F5AD87 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76212DA271087D600F5AD87 /* MenuViewController.swift */; };
 		F77A16E42704E2970090851D /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A16E32704E2970090851D /* Preview.swift */; };
 		F77A17212705DB010090851D /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A17202705DB010090851D /* CollectionTableViewCell.swift */; };
 		F77A172527064ECD0090851D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A172427064ECD0090851D /* LoginViewController.swift */; };
@@ -28,6 +30,8 @@
 		F77A487A2703819A00FF3538 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77A48792703819A00FF3538 /* ProfileViewController.swift */; };
 		F7AB5E4426F3A30000DF7248 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AB5E4326F3A30000DF7248 /* HomeViewController.swift */; };
 		F7AB5E5426F4DF2100DF7248 /* MusicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AB5E5326F4DF2100DF7248 /* MusicModel.swift */; };
+		F7BDBD4D27112013005BAF9A /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BDBD4C27112013005BAF9A /* UINavigationController+Extension.swift */; };
+		F7BDBD5527114373005BAF9A /* ProfileMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BDBD5427114373005BAF9A /* ProfileMenuButton.swift */; };
 		F7D065A426BD790600A31E37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065A326BD790600A31E37 /* AppDelegate.swift */; };
 		F7D065A626BD790600A31E37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065A526BD790600A31E37 /* SceneDelegate.swift */; };
 		F7D065A826BD790600A31E37 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D065A726BD790600A31E37 /* MusicViewController.swift */; };
@@ -51,6 +55,8 @@
 		F727B66B26E5A283006D2F3C /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F727B66D26E5AA88006D2F3C /* BaseViewAController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewAController.swift; sourceTree = "<group>"; };
 		F727B67926E65564006D2F3C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		F76212D82710811F00F5AD87 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		F76212DA271087D600F5AD87 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		F77A16E32704E2970090851D /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		F77A17202705DB010090851D /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		F77A172427064ECD0090851D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +72,8 @@
 		F77A48792703819A00FF3538 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F7AB5E4326F3A30000DF7248 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F7AB5E5326F4DF2100DF7248 /* MusicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicModel.swift; sourceTree = "<group>"; };
+		F7BDBD4C27112013005BAF9A /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		F7BDBD5427114373005BAF9A /* ProfileMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuButton.swift; sourceTree = "<group>"; };
 		F7D065A026BD790600A31E37 /* Music Bag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Bag.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D065A326BD790600A31E37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7D065A526BD790600A31E37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,8 +134,19 @@
 				F727B67926E65564006D2F3C /* UIImage+Extension.swift */,
 				F77A48752702888F00FF3538 /* UIImage+ResizeImageExtensin.swift */,
 				F77A172A270BB0670090851D /* UIView+Extension.swift */,
+				F7BDBD4C27112013005BAF9A /* UINavigationController+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F76212D7271080F400F5AD87 /* Menu Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F76212D82710811F00F5AD87 /* ContainerViewController.swift */,
+				F76212DA271087D600F5AD87 /* MenuViewController.swift */,
+				F7BDBD5427114373005BAF9A /* ProfileMenuButton.swift */,
+			);
+			path = "Menu Controller";
 			sourceTree = "<group>";
 		};
 		F77A172327064EBD0090851D /* Login */ = {
@@ -158,6 +177,7 @@
 		F77A48782703818400FF3538 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F76212D7271080F400F5AD87 /* Menu Controller */,
 				F77A48792703819A00FF3538 /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -392,9 +412,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7BDBD4D27112013005BAF9A /* UINavigationController+Extension.swift in Sources */,
 				F7D065C026BD99D600A31E37 /* HomeTableViewCell.swift in Sources */,
+				F76212DB271087D600F5AD87 /* MenuViewController.swift in Sources */,
 				F7FC156226FE14CB00E8D279 /* TabBar.swift in Sources */,
 				F7D065A826BD790600A31E37 /* MusicViewController.swift in Sources */,
+				F76212D92710811F00F5AD87 /* ContainerViewController.swift in Sources */,
 				F727B66E26E5AA88006D2F3C /* BaseViewAController.swift in Sources */,
 				F77A487A2703819A00FF3538 /* ProfileViewController.swift in Sources */,
 				F7AB5E4426F3A30000DF7248 /* HomeViewController.swift in Sources */,
@@ -409,6 +432,7 @@
 				F7E598DA26D674BA00F6BD94 /* Service.swift in Sources */,
 				F77A172527064ECD0090851D /* LoginViewController.swift in Sources */,
 				F77A16E42704E2970090851D /* Preview.swift in Sources */,
+				F7BDBD5527114373005BAF9A /* ProfileMenuButton.swift in Sources */,
 				F77A48762702888F00FF3538 /* UIImage+ResizeImageExtensin.swift in Sources */,
 				F77A487227022F0400FF3538 /* MusicManager.swift in Sources */,
 				F727B67A26E65564006D2F3C /* UIImage+Extension.swift in Sources */,

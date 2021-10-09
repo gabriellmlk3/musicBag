@@ -26,7 +26,7 @@ class MusicManager {
     
     var hasPlayingMusic: Bool = false {
         didSet {
-            print("Music Manager: hasPlayingMusic has seted to \(hasPlayingMusic)\n")
+            print("Music Manager: hasPlayingMusic has changed to \(hasPlayingMusic)\n")
             self.notify()
         }
     }

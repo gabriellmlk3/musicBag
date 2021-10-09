@@ -61,6 +61,14 @@ extension UIImage {
         return UIImage(named: "userIcon")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
     }
     
+    open class var gearIcon: UIImage {
+        return UIImage(named: "gearIcon")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
+    }
+    
+    open class var logoutIcon: UIImage {
+        return UIImage(named: "logoutIcon")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
+    }
+    
     open class var filledHeartCircleIcon: UIImage {
         return UIImage(named: "filledHeartCircle")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
     }

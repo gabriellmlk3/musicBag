@@ -8,7 +8,13 @@
 import UIKit
 import Kingfisher
 
+protocol ProfileViewControllerDelegate {
+    func toggleMenu()
+}
+
 class ProfileViewController: BaseViewController {
+    
+    var delegate: ProfileViewControllerDelegate?
     
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -78,23 +84,42 @@ class ProfileViewController: BaseViewController {
         tableView.backgroundColor = .clear
         return tableView
     }()
+    
+    private let gearMenuButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.gearIcon.resizeWithScaleAspectFitMode(to: 35), for: .normal)
+        button.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0 , width: 35, height: 35)
+        button.tintColor = .white
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: true)
         view.backgroundColor = .backgroundColor
-        navigationController?.navigationItem.title = "Profile"
+        configureNavigationBar()
+        fulfillData()
         setupView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fulfillData()
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(false, animated: true)
+    }
+    
+    @objc
+    private func toggleMenu() {
+        self.delegate?.toggleMenu()
+    }
+    
+    private func configureNavigationBar() {
+        self.navigationController?.transparentNavigationBar()
+        self.navigationController?.setTintColor(.white)
     }
     
     private func fulfillData() {
@@ -182,10 +207,18 @@ class ProfileViewController: BaseViewController {
             make.bottom.equalToSuperview()
             make.height.equalTo(150)
         }
+        
+        headerContainerView.addSubview(gearMenuButton)
+        gearMenuButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.leading.equalToSuperview().offset(30)
+            make.trailing.equalTo(profilImageBorderView.snp.leading).offset(-30)
+        }
     }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
