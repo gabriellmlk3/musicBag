@@ -111,7 +111,7 @@ class ProfileViewController: BaseViewController {
     private func configureNavigationBar() {
         self.navigationController?.transparentNavigationBar()
         self.navigationController?.setTintColor(.white)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: .homeIcon, style: .plain, target: self, action: #selector(toggleMenu))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: .gearIcon, style: .plain, target: self, action: #selector(toggleMenu))
     }
     
     private func fulfillData() {
