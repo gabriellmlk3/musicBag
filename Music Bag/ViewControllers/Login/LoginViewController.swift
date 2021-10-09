@@ -51,6 +51,18 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.title = "Login"
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.navigationItem.setHidesBackButton(false, animated: true)
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
     private func setupView() {
         
         view.addSubview(emailTextField)
@@ -100,7 +112,7 @@ class LoginViewController: BaseViewController {
             case .failure(let error):
                 self.showAlert(text: error.localizedDescription)
             case .success(_):
-                self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+                self.navigationController?.pushViewController(ContainerViewController(), animated: true)
             }
         }
     }

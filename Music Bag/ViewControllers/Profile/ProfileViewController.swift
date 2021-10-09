@@ -8,7 +8,13 @@
 import UIKit
 import Kingfisher
 
+protocol ProfileViewControllerDelegate {
+    func toggleMenu()
+}
+
 class ProfileViewController: BaseViewController {
+    
+    var delegate: ProfileViewControllerDelegate?
     
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -81,20 +87,31 @@ class ProfileViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: true)
         view.backgroundColor = .backgroundColor
-        navigationController?.navigationItem.title = "Profile"
+        configureNavigationBar()
+        fulfillData()
         setupView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fulfillData()
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         self.navigationItem.setHidesBackButton(false, animated: true)
+    }
+    
+    @objc
+    private func toggleMenu() {
+        self.delegate?.toggleMenu()
+    }
+    
+    private func configureNavigationBar() {
+        self.navigationController?.transparentNavigationBar()
+        self.navigationController?.setTintColor(.white)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: .homeIcon, style: .plain, target: self, action: #selector(toggleMenu))
     }
     
     private func fulfillData() {
@@ -186,6 +203,7 @@ class ProfileViewController: BaseViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }

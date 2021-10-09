@@ -39,11 +39,15 @@ class TabBar: UITabBarController {
         viewControllers = [
             createNavController(viewController: HomeViewController(), title: "Musics", icon: .homeIcon, index: 0),
             createNavController(viewController: NoPlayingMusicViewController(), title: "", icon: .tabBarPlayIcon, index: 1),
-            createNavController(viewController: LoginViewController(), title: "Login", icon: .userIcon, index: 2)
+            createNavController(viewController: FireBaseManager.shared.auth.currentUser == nil ? LoginViewController() : ContainerViewController(),
+                                title: FireBaseManager.shared.auth.currentUser == nil ? "Login" : "Profile",
+                                icon: .userIcon,
+                                index: 2,
+                                largeTitles: false)
         ]
         }
     
-    private func createNavController(viewController: UIViewController, title: String, icon: UIImage, index: Int) -> UINavigationController {
+    private func createNavController(viewController: UIViewController, title: String, icon: UIImage, index: Int, largeTitles: Bool = true) -> UINavigationController {
         let iconResized = icon.resizeWithScaleAspectFitMode(to: 30, resizeFramework: .coreGraphics)
         viewController.tabBarItem = UITabBarItem(title: nil, image: iconResized, tag: index)
         viewController.navigationItem.title = title
@@ -51,10 +55,13 @@ class TabBar: UITabBarController {
         let backBarButtonItem = UIButton(type: .system)
         backBarButtonItem.setImage(.backArrowIcon.withRenderingMode(.alwaysOriginal), for: .normal)
         navigationController.navigationController?.navigationItem.backBarButtonItem = UIBarButtonItem(customView: backBarButtonItem)
-        navigationController.navigationBar.tintColor = .white
         navigationController.delegate = self
-        navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.navigationBar.barTintColor = .black1E2125
+        navigationController.navigationBar.prefersLargeTitles = largeTitles
+        navigationController.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold),
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ]
+        navigationController.transparentNavigationBar()
         navigationController.navigationBar.largeTitleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .bold),
             NSAttributedString.Key.foregroundColor: UIColor.white

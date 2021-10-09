@@ -42,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        FireBaseManager.shared.signOut()
     }
 }
 
