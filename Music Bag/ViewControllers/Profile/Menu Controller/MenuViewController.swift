@@ -9,35 +9,39 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    private var logoutButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .black1E2125
-        button.setTitleColor(.white, for: .normal)
-        button.setAttributedTitle(NSAttributedString(string: "Logout", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .semibold)]), for: .normal)
-        button.addTarget(self, action: #selector(logout), for: .touchUpInside)
-        return button
-    }()
-
+    private let logoutButton = ProfileMenuButton(title: "Logout", icon: .logoutIcon, target: self, action: #selector(logout))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black1E2125
         setupLayout()
     }
     
+    
+    
     private func setupLayout() {
         
         view.addSubview(logoutButton)
         logoutButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            make.leading.equalToSuperview().offset(15)
+            make.leading.equalToSuperview().offset(20)
         }
     }
     
     @objc
     private func logout() {
         if FireBaseManager.shared.signOut() {
-            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            let alert = UIAlertController(title: "Should leave?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+                self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            
+            navigationController?.present(alert, animated: true, completion: nil)
         }
+        
     }
 
 }
